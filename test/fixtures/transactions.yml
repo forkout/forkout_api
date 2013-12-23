@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  details: MyText
+  amount: 1.5
+  user_id: 1
+  group_id: 1
+  group_member_id: 1
+
+two:
+  description: MyString
+  details: MyText
+  amount: 1.5
+  user_id: 1
+  group_id: 1
+  group_member_id: 1
