@@ -1,5 +1,5 @@
 class Transaction < ActiveRecord::Base
-#  attr_accessible :amount, :description, :details, :group_id, :group_member_id, :user_id
+  attr_accessible :amount, :description, :details, :group_id, :group_member_id, :user_id
   belongs_to :user
   belongs_to :group
 
