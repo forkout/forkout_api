@@ -11,4 +11,19 @@ class User < ActiveRecord::Base
   def full_name
   	first_name.humanize + " " + last_name.humanize
   end
+
+  def self.authenticate(email, password)
+    user = self.find_by_email(email)
+    # authenticate
+    if (user and user.authenticated?(password) )      
+      return user
+    end
+    nil
+  end
+
+  def authenticated?(password)
+    password_hash == encrypt(password)
+  end
+
+
 end

@@ -33,5 +33,36 @@ class ServicesController < ApplicationController
 
     render json: response_object
   end
-end
 
+  def sign_in
+    [:email, :password].each do |key|
+      unless params[key]
+        render json: {status: "failed", message: "missing paramater : #{key}"}
+        return
+      end
+    end
+
+    user = User.authenticate(params[:email], params[:password])
+    if user
+      response_object = {
+                          status: "success",
+                          user: user
+                        }
+    else
+      response_object = {
+                          status: "failed",
+                          message: "Authentication failed, incorrect email or password"
+                        }
+    end
+    render json: response_object
+  end
+
+  def sync_contact
+    users = User.where(:contact_number => eval(params[:contact_list]))
+    response_object = {
+                        status: "success",
+                        users: users
+                      }
+    render json: response_object
+  end
+end
