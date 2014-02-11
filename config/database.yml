@@ -19,7 +19,10 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
-  pool: 5
-  timeout: 5000
+  adapter: mysql2
+  encoding: utf8
+  database: forkovjj_paypro
+  username: forkovjj_fo
+  password: forkout@123
+  host: 199.79.63.83
+  port: 3306
