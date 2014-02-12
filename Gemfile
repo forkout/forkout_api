@@ -12,7 +12,7 @@ group :development do
 end
 
 group :production do
-	gem 'mysql2'
+	gem 'mysql'
 end
 # Gems used only for assets and not required
 # in production environments by default.
@@ -42,3 +42,5 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem 'pushmeup'
