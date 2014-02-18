@@ -22,7 +22,7 @@ production:
   adapter: mysql
   encoding: utf8
   database: forkovjj_paypro
-  username: forkovjj_fo
-  password: forkout@123
+  username: forkovjj
+  password: androidboy
   host: 199.79.63.83
   port: 3306
