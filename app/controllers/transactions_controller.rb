@@ -45,10 +45,10 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render json: @transaction, status: :created, location: @transaction }
+        format.json { render json: {transaction: @transaction, status: "success"}, status: :created, location: @transaction }
       else
         format.html { render action: "new" }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
+        format.json { render json: {errors: @transaction.errors, status: "failed"}, status: :unprocessable_entity }
       end
     end
   end
