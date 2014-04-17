@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131223105315) do
+ActiveRecord::Schema.define(:version => 20140416163356) do
 
   create_table "group_members", :force => true do |t|
     t.integer  "user_id"
@@ -35,8 +35,9 @@ ActiveRecord::Schema.define(:version => 20131223105315) do
     t.integer  "user_id"
     t.integer  "group_id"
     t.integer  "group_member_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.boolean  "settled",         :default => false
   end
 
   create_table "users", :force => true do |t|
@@ -45,8 +46,10 @@ ActiveRecord::Schema.define(:version => 20131223105315) do
     t.string   "email"
     t.string   "contact_number"
     t.string   "registration_status"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
+    t.datetime "created_at",             :null => false
+    t.datetime "updated_at",             :null => false
+    t.string   "password"
+    t.string   "device_registration_id"
   end
 
 end
