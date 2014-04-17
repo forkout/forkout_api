@@ -11,4 +11,12 @@ class Transaction < ActiveRecord::Base
 
   validates :user_id, :presence => true
   validates :group_id, :presence => true
+
+  after_save :send_notifications
+
+  def send_notifications
+    device_registration_ids = self.group.users.where("`users`.`id`  != #{self.user_id}").pluck(:device_registration_id)
+    data = { "transaction" => self }
+    GCM.send_notification(device_registration_ids, data)
+  end
 end

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :contact_number, :email, :first_name, :last_name, :registration_status
+  attr_accessible :contact_number, :email, :first_name, :last_name, :registration_status, :password, :device_registration_id
   has_many :group_members 
   has_many :groups, through: :group_members
 
