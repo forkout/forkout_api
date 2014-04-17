@@ -7,7 +7,15 @@ ForkoutRails3::Application.routes.draw do
 
   resources :users
 
-  get 'services/group_expences_report'
+  get 'services/group_expenses_report'
+  post 'services/sync_contacts'
+  get 'services/sync_contacts'
+  post 'services/add_group_members'
+  post 'services/authenticate_user'
+  get 'services/get_groups'
+  get 'services/get_group_members'
+  get 'services/get_group_transactions'
+  get 'services/get_all_group_members'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
