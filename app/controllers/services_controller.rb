@@ -1,4 +1,8 @@
 class ServicesController < ApplicationController
+  def send_notification device_registration_ids, data
+    GCM.send_notification(device_registration_ids, data)
+  end
+
   def group_expenses_report
     [:group_id].each do |key|
       unless params[key]
@@ -92,13 +96,23 @@ class ServicesController < ApplicationController
         return
       end
     end
-    user_ids = parse(eval(params[:group_member_ids]))
+
     group = Group.find(params[:group_id])
+
     if group
-      user_ids.each do |user_id|
-        user = User.find(user_id)
-        group.group_members.create!(user_id: user.id) if user
+      #find users
+      user_ids = parse(eval(params[:group_member_ids]))
+      user_ids = User.where("`users`.id in (#{user_ids.join(',')})").pluck(:id)
+      
+      #create group members
+      group.transaction do 
+        group.group_members.create!(user_ids.map {|id| {:user_id => id}}) 
       end
+
+      #send notification to users 
+      device_registration_ids  = User.where("`users`.id in ( #{user_ids.join(',')} )").pluck(:device_registration_id)
+      send_notification device_registration_ids, {"group"=> group}}
+      
       response_object = {
                           status: "success"
                         }
@@ -107,11 +121,8 @@ class ServicesController < ApplicationController
                           status: "failed",
                           message: 'group not found'
                         }
-
     end
-
     render json: response_object
-      
   end
 
   def authenticate_user
